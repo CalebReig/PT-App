@@ -18,7 +18,7 @@ export class Pipeline extends Stack {
         // PUT YOUR CODE REPO + BRANCH HERE
         input: CodePipelineSource.gitHub('CalebReig/PT-App', 'main'),
         installCommands: ['cd cdk', 'npm i -g npm@latest'],
-        commands: ['npm -v', 'npm ci', 'npm run build', 'npx cdk synth'],
+        commands: ['npm -v', 'npm ci', 'npm run build', 'npx cdk synth', 'mv cdk.out ..'],
         primaryOutputDirectory: path.join('cdk', 'cdk.out')
       })
     });
