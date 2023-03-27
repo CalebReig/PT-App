@@ -1,6 +1,9 @@
 {
   "name": "cdk",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=16.0.0 <17.0.0"
+  },
   "bin": {
     "cdk": "bin/cdk.js"
   },
@@ -12,7 +15,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
-    "@types/node": "18.14.6",
+    "@types/node": "16.x",
     "jest": "^29.5.0",
     "ts-jest": "^29.0.5",
     "aws-cdk": "2.68.0",

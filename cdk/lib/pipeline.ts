@@ -16,7 +16,7 @@ export class Pipeline extends Stack {
       synth: new ShellStep('Synth', {
         // PUT YOUR CODE REPO + BRANCH HERE
         input: CodePipelineSource.gitHub('CalebReig/PT-App', 'main'),
-        installCommands: ['npm i -g npm@latest', 'npm i'],
+        installCommands: ['npm i -g npm@latest'],
         commands: ['npm -v', 'npm ci', 'npm run build', 'npx cdk synth']
       })
     });
