@@ -6,6 +6,7 @@ import {
   ShellStep,
 } from 'aws-cdk-lib/pipelines';
 import { BaseStage } from './stages/baseStage';
+import * as path from 'path';
 
 export class Pipeline extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -16,8 +17,9 @@ export class Pipeline extends Stack {
       synth: new ShellStep('Synth', {
         // PUT YOUR CODE REPO + BRANCH HERE
         input: CodePipelineSource.gitHub('CalebReig/PT-App', 'main'),
-        installCommands: ['npm i -g npm@latest'],
-        commands: ['npm -v', 'npm ci', 'npm run build', 'npx cdk synth']
+        installCommands: ['cd cdk', 'npm i -g npm@latest'],
+        commands: ['npm -v', 'npm ci', 'npm run build', 'npx cdk synth'],
+        primaryOutputDirectory: path.join('cdk', 'cdk.out')
       })
     });
 

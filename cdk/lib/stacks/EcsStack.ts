@@ -14,7 +14,7 @@ import {
 } from 'aws-cdk-lib';
 import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import { Construct } from 'constructs';
-import * as path from 'path'
+import * as path from 'path';
 
 export class EcsStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
