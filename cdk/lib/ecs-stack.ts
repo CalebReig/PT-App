@@ -34,13 +34,13 @@ export class EcsStack extends Stack {
     });
     // Docker image Assets
     const frontEndImage = new DockerImageAsset(this, 'FrontEndImage', {
-        directory: path.join(__dirname, '../../..', 'front-end'),
+        directory: path.join(__dirname, '../..', 'front-end'),
         invalidation: {
           buildArgs: false,
         },
       });
     const backEndImage = new DockerImageAsset(this, 'BackEndImage', {
-        directory: path.join(__dirname, '../../..', 'back-end'),
+        directory: path.join(__dirname, '../..', 'back-end'),
         invalidation: {
           buildArgs: false,
           },
