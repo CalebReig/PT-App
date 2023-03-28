@@ -23,7 +23,9 @@ jobs:
           aws-region: 'us-west-1'
 
       - name: Install dependencies
-        run: cd cdk && npm ci
+        run: 
+          cd cdk && npm ci && pwd
+
 
       - name: Synth stack
         run: cdk synth
