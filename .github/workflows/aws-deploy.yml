@@ -24,11 +24,11 @@ jobs:
 
       - name: Install dependencies
         run: 
-          cd cdk && npm ci && pwd
+          cd cdk && npm ci
 
 
       - name: Synth stack
-        run: cdk synth
+        run: cd cdk && cdk synth
 
       - name: Deploy stack
-        run: cdk deploy --all --require-approval never
+        run: cd cdk && cdk deploy --all --require-approval never
