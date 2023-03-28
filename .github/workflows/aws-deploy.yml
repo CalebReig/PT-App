@@ -24,8 +24,7 @@ jobs:
 
       - name: Install dependencies
         run: 
-          cd cdk && npm ci
-
+          cd cdk && npm ci && npm install -g aws-cdk 
 
       - name: Synth stack
         run: cd cdk && cdk synth
