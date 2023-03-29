@@ -18,7 +18,7 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import { Construct } from 'constructs';
 import * as path from 'path';
 import { 
-  CfnService,
+  DnsRecordType,
   PrivateDnsNamespace 
 } from 'aws-cdk-lib/aws-servicediscovery';
 import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
@@ -63,38 +63,13 @@ export class EcsStack extends Stack {
           },
         });
 
-    // ECS Service discovery
-    const service = new CfnService(this, 'Service', {
-      name: 'my-service',
-      namespaceId: namespace.namespaceId,
-      dnsConfig: {
-        dnsRecords: [
-          {
-            ttl: 60,
-            type: 'A'
-          }
-        ],
-        namespaceId: namespace.namespaceId,
-        routingPolicy: 'MULTIVALUE'
-      },
-      healthCheckCustomConfig: {
-        failureThreshold: 1
-      }
-    });
-
-    const serviceArn = service.attrArn;
-    const serviceUrl = `http://${serviceArn.split('/')[1]}`;
-
     // Frontend container added to ECS cluster with link to backend
-    taskDefinition.addContainer('FrontEndContainer', {
+    const frontendContainer = taskDefinition.addContainer('FrontEndContainer', {
       image: ContainerImage.fromDockerImageAsset(frontEndImage),
       portMappings: [{ containerPort: 3000 }],
       memoryReservationMiB: 50,
       cpu: 1,
       logging: new AwsLogDriver({ streamPrefix: 'front-end' }),
-      environment: {
-        BACKEND_URL: `${serviceUrl}:8000`,
-      },
     });
 
     // Backend container added to ECS cluster
@@ -114,6 +89,11 @@ export class EcsStack extends Stack {
       serviceName: 'PTApp',
       assignPublicIp: true,
       publicLoadBalancer: true,
+      cloudMapOptions: {
+        name: 'pt-app',
+        cloudMapNamespace: namespace,
+        dnsRecordType: DnsRecordType.A,
+      }
     });
 
   // create DynamoDB table
