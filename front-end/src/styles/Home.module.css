@@ -73,5 +73,6 @@
   
   .btn:hover {
     background-color: #34495e;
+    transform: translateY(-2px);
   }
   
