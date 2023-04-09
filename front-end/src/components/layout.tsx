@@ -1,5 +1,5 @@
-import Navbar from './navbar';
-import Footer from "./footer";
+import Navbar from './Navbar';
+import Footer from './Footer';
 import Head from 'next/head'
 
 type Props = {

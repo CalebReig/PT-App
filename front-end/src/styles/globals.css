@@ -12,7 +12,6 @@ a {
 
 a:hover {
   color: #f39c12;
-  text-decoration: underline;
 }
 
 /* Add a utility class for text alignment */
