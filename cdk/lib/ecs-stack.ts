@@ -97,9 +97,9 @@ export class EcsStack extends Stack {
     });
 
   // create DynamoDB table
-  const table = new Table(this, 'Table', {
+  const table = new Table(this, 'UserTable', {
     partitionKey: { name: 'id', type: AttributeType.STRING },
-    tableName: 'MyTable',
+    tableName: 'user',
   });
 
   backendContainer.addToExecutionPolicy(new PolicyStatement({
