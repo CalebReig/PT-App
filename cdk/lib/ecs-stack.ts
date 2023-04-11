@@ -21,6 +21,7 @@ import {
   DnsRecordType,
   PrivateDnsNamespace 
 } from 'aws-cdk-lib/aws-servicediscovery';
+import { ApplicationProtocol } from 'aws-cdk-lib/aws_elasticloadbalancingv2';
 import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
 
 
@@ -89,6 +90,7 @@ export class EcsStack extends Stack {
       serviceName: 'PTApp',
       assignPublicIp: true,
       publicLoadBalancer: true,
+      protocol: ApplicationProtocol.HTTPS,
       cloudMapOptions: {
         name: 'pt-app',
         cloudMapNamespace: namespace,
