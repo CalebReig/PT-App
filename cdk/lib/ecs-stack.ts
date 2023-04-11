@@ -21,6 +21,7 @@ import {
   DnsRecordType,
   PrivateDnsNamespace 
 } from 'aws-cdk-lib/aws-servicediscovery';
+import { ApplicationProtocol } from 'aws-cdk-lib/aws_elasticloadbalancingv2';
 import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
 
 
@@ -89,6 +90,7 @@ export class EcsStack extends Stack {
       serviceName: 'PTApp',
       assignPublicIp: true,
       publicLoadBalancer: true,
+      protocol: ApplicationProtocol.HTTPS,
       cloudMapOptions: {
         name: 'pt-app',
         cloudMapNamespace: namespace,
@@ -97,9 +99,9 @@ export class EcsStack extends Stack {
     });
 
   // create DynamoDB table
-  const table = new Table(this, 'Table', {
+  const table = new Table(this, 'UserTable', {
     partitionKey: { name: 'id', type: AttributeType.STRING },
-    tableName: 'MyTable',
+    tableName: 'user',
   });
 
   backendContainer.addToExecutionPolicy(new PolicyStatement({
