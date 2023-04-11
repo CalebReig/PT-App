@@ -21,7 +21,7 @@ import {
   DnsRecordType,
   PrivateDnsNamespace 
 } from 'aws-cdk-lib/aws-servicediscovery';
-import { ApplicationProtocol } from 'aws-cdk-lib/aws_elasticloadbalancingv2';
+import { ApplicationProtocol } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
 
 
