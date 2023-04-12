@@ -83,6 +83,12 @@ export class EcsStack extends Stack {
       logging: new AwsLogDriver({ streamPrefix: 'back-end' }),
     });
 
+    // hosted zone
+    const zoneFromAttributes = PublicHostedZone.fromPublicHostedZoneAttributes(this, 'MyZone', {
+      zoneName: 'workoutwithdanny.com',
+      hostedZoneId: 'Z06182172BUKO1DHK3546',
+    });
+
     // Load Balancer
     new ApplicationLoadBalancedFargateService(this, "PTApp", {
       vpc: vpc,
@@ -93,7 +99,7 @@ export class EcsStack extends Stack {
       publicLoadBalancer: true,
       protocol: ApplicationProtocol.HTTPS,
       domainName: 'workoutwithdanny.com',
-      domainZone: PublicHostedZone.fromHostedZoneId(this, 'pub-hosted-zone', 'Z06182172BUKO1DHK3546'),
+      domainZone: zoneFromAttributes,
       cloudMapOptions: {
         name: 'pt-app',
         cloudMapNamespace: namespace,
