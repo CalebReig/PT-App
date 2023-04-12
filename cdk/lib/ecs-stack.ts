@@ -22,6 +22,7 @@ import {
   PrivateDnsNamespace 
 } from 'aws-cdk-lib/aws-servicediscovery';
 import { ApplicationProtocol } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import { PublicHostedZone } from 'aws-cdk-lib/aws-route53';
 import { Table, AttributeType } from 'aws-cdk-lib/aws-dynamodb';
 
 
@@ -91,6 +92,8 @@ export class EcsStack extends Stack {
       assignPublicIp: true,
       publicLoadBalancer: true,
       protocol: ApplicationProtocol.HTTPS,
+      domainName: 'workoutwithdanny.com',
+      domainZone: PublicHostedZone.fromHostedZoneId(this, 'pub-hosted-zone', 'Z06182172BUKO1DHK3546'),
       cloudMapOptions: {
         name: 'pt-app',
         cloudMapNamespace: namespace,
